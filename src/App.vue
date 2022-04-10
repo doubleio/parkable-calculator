@@ -1,38 +1,36 @@
 <template>
-  <section class="app-wrapper">
-    <div class="calc">
-      <app-tab-1 
-        @revenue="setRevenue"
-        @workingVal="setWorkingVal"
-        @parkingVal="setParkingVal"
-        @EAParks="setEAParks"
-        @time="setTime"
-        @formData="setFormData"
-        :tab="tab"
-        v-show="tab === 1"
-      ></app-tab-1>
-      <app-tab-2 
-        @updateTab="changeTab"
-        v-show="tab === 2"
-      ></app-tab-2>
+  <div class="calc">
+    <app-tab-1 
+      @revenue="setRevenue"
+      @workingVal="setWorkingVal"
+      @parkingVal="setParkingVal"
+      @EAParks="setEAParks"
+      @time="setTime"
+      @formData="setFormData"
+      :tab="tab"
+      v-show="tab === 1"
+    ></app-tab-1>
+    <app-tab-2 
+      @updateTab="changeTab"
+      v-show="tab === 2"
+    ></app-tab-2>
 
-      <div class="calc__aside">
-        <app-aside-tab-1
-          :revenue="revenue"
-          :working="working"
-          :parking="parking"
-          :EAParks="EAParks"
-          :time="time"
-          @updateTab="changeTab"
-          v-if="tab === 1"
-        ></app-aside-tab-1>
-        <app-aside-tab-2
-          :time="time"
-          v-else
-        ></app-aside-tab-2>
-      </div>
+    <div class="calc__aside">
+      <app-aside-tab-1
+        :revenue="revenue"
+        :working="working"
+        :parking="parking"
+        :EAParks="EAParks"
+        :time="time"
+        @updateTab="changeTab"
+        v-if="tab === 1"
+      ></app-aside-tab-1>
+      <app-aside-tab-2
+        :time="time"
+        v-else
+      ></app-aside-tab-2>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
