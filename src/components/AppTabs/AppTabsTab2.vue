@@ -1,5 +1,6 @@
 <template>
   <div class="calc__main">
+    <slot></slot>
     <button class="calc__main-back" @click="changeTab(1)">
       <icon-back></icon-back>
       Back to ROI calculator

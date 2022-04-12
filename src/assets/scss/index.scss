@@ -1,5 +1,6 @@
-@import '../../../node_modules/normalize.css/normalize.css';
+// @import '../../../node_modules/normalize.css/normalize.css'; // Remove the comment on these styles when you change something
 @import './animations.scss';
+@import './components/bigSlider';
 
 * {
   box-sizing: border-box;
@@ -11,13 +12,112 @@
   line-height: 100%;
   color: black;
   display: flex;
-  width: 95%;
-  max-width: 1220px;
+  width: 100%;
   font-size: 20px;
   background-color: #FAFAFA;
   border-radius: 12px;
   overflow: hidden;
   margin: 0 auto;
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 590px) {
+    font-size: 20px;
+    padding-top: 40px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  & .calc__stepper {
+    display: flex;
+    margin-bottom: 30px;
+
+    @media screen and (max-width: 590px) {
+      justify-content: center;
+    }
+
+    &-item {
+      text-align: center;
+      color: rgba(3, 129, 199, 0.3);
+      font-weight: 700;
+      margin-right: 9px;
+      padding-right: 30px;
+      margin-right: 25px;
+      line-height: 20px;
+      cursor: pointer;
+
+      & div:nth-child(1)  {
+        text-transform: uppercase;
+        font-size: 14px;
+      }
+
+      & div:nth-child(2) {
+        border: 1px solid #0381C7;
+        font-size: 20px;
+        color: #0381C7;
+        margin: 4px auto 0 auto;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        position: relative;
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 33px;
+          border: 2px dashed #0381C7;
+          right: -50px;
+        }
+      }
+    }
+
+    &-item:last-child {
+      padding-right: 0px;
+      margin-right: 0px;
+
+      & div:nth-child(2) {
+        &:before {
+          content: none;
+        }
+      }
+    }
+
+    &-item.active {
+      text-align: center;
+      color: #0381C7;
+
+      & div:nth-child(2) {
+        background-color: #0381C7;
+        color: white;
+      }
+    }
+  }
+
+  & .calc__slider {
+    gap: 28px;
+    @media screen and (max-width: 590px) {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 50px;
+
+      & span {
+        display: block;
+        text-align: center;
+        font-size: 36px;
+        line-height: 50px;
+      }
+
+      &-inp {
+        width: 100%;
+        max-width: none;
+      }
+    } 
+  }
 
   & h1, h2, h3 {
     line-height: 38px;
@@ -70,15 +170,8 @@
       background: url('https://uploads-ssl.webflow.com/618d84f7039384e134b466ec/6236630bd589f11b55be16e6_list-dot.svg');
       background-repeat: no-repeat;
       background-position: top left;
+      text-align: left;
     }
-  }
-
-  @media screen and (max-width: 768px){
-    font-size: 16px;
-  }
-
-  @media screen and (max-width: 479px){
-    flex-direction: column;
   }
   
   &__main {
@@ -89,8 +182,8 @@
       padding: 20px;
     }
 
-    @media screen and (max-width: 479px){
-      padding: 12px;
+    @media screen and (max-width: 590px){
+      padding: 0px 3% 60px 3%;
     }
 
     & .calc__txt-sm {
@@ -171,6 +264,10 @@
     & ul > li {
       line-height:100%;
       background-position: 0px;
+
+      @media screen and (max-width: 590px) {
+        font-size: 14px;
+      }
     }
 
     & h1 {
@@ -220,6 +317,10 @@
         margin-top: 10px;
         width: 100%;
       }
+
+      @media screen and (max-width: 590px) {
+        background-image: none;
+      }
     }
 
     &-btn {
@@ -240,6 +341,7 @@
       padding: 20px;
       font-size: 13px;
       width: 100%;
+      text-align: left;
 
       &-label {
         line-height: 140%;
@@ -287,91 +389,6 @@
       .calc__aside-list-cars {
         bottom: -120px;
         left: -20px
-      }
-    }
-  }
-
-  &__big-slider {
-    margin-bottom: 50px;
-    height: 60px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-
-    &-head {
-      margin-bottom: 10px;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      @media screen and (max-width: 991px) {
-        font-size: 13px;
-      }
-
-      & div:nth-child(1) { color: #53B1FD; }
-      & div:nth-child(2) { color: #93A842; }
-      & div:nth-child(3) { color: #FDB022; }
-    }
-
-    &-tag {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      color: white;
-      font-weight: 700;
-      padding: 0px 5%;
-      user-select: none;
-
-      &:nth-child(1) { 
-        background: #53B1FD; 
-      }
-      &:nth-child(2) { 
-        background: #93A842; 
-      }
-      &:nth-child(3) { 
-        background: #FDB022; 
-
-        & div {
-          display: none;
-        }
-      }
-    }
-    
-    & .slider-handle {
-      position: absolute;
-      z-index: 10;
-      right: -3px;
-      border-radius: 0px;
-      height: 60px;
-      width: 6px;
-      box-shadow: none;
-      cursor: ew-resize;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      top: 0;
-      bottom: 0;
-
-      &:before {
-        content: '';
-        position: absolute;
-        width: 40px;
-        height: 60px;
-      }
-
-      &__icon {
-        position: absolute;
-        pointer-events: none;
-      }
-
-      &:active {
-        &:before {
-          width: 300px;
-        }
       }
     }
   }
@@ -446,6 +463,24 @@
       &.wrapper--countries {
         & label {
           pointer-events: all;
+        }
+      }
+    }
+
+    @media screen and (max-width: 590px) {
+      flex-direction: column;
+      gap: 17px;
+      margin-bottom: 50px;
+
+      &-wrapper {
+        margin-left: 0px;
+        width: 100%;
+        max-width: none;
+
+        & .calc__radio-btn {
+          width: 51%;
+          display: flex;
+          justify-content: center;
         }
       }
     }

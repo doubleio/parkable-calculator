@@ -1,5 +1,7 @@
 <template>
   <div class="calc__main">
+    <slot></slot>
+
     <h1>Parkable ROI calculator</h1>
 
     <div class="calc__main-actions">

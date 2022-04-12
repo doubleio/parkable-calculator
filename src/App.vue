@@ -1,6 +1,7 @@
 <template>
   <div class="calc">
-    <app-tab-1 
+    <component
+      :is="'app-tab-1'"
       @revenue="setRevenue"
       @workingVal="setWorkingVal"
       @parkingVal="setParkingVal"
@@ -8,27 +9,27 @@
       @time="setTime"
       @formData="setFormData"
       :tab="tab"
-      v-show="tab === 1"
-    ></app-tab-1>
-    <app-tab-2 
-      @updateTab="changeTab"
+      v-if="tab === 1"
+    >
+      <app-stepper :tab="tab" @setNewTab="changeStepperTab"></app-stepper>
+    </component>
+    
+    <app-tab-2
+      @updateTab="changeTab"   
+      :tab="tab" 
       v-show="tab === 2"
     ></app-tab-2>
 
     <div class="calc__aside">
-      <app-aside-tab-1
+      <component 
+        :is="'app-aside-tab-' + tab"
         :revenue="revenue"
         :working="working"
         :parking="parking"
         :EAParks="EAParks"
         :time="time"
         @updateTab="changeTab"
-        v-if="tab === 1"
-      ></app-aside-tab-1>
-      <app-aside-tab-2
-        :time="time"
-        v-else
-      ></app-aside-tab-2>
+      ></component>
     </div>
   </div>
 </template>
@@ -38,6 +39,7 @@
   import AppAsideTab2 from './components/AppAside/AppAsideTab2.vue'
   import AppTab1 from './components/AppTabs/AppTabsTab1.vue'
   import AppTab2 from './components/AppTabs/AppTabsTab2.vue'
+  import AppStepper from './components/AppStepper.vue'
 
   export default {
     components: {
@@ -45,6 +47,7 @@
       AppAsideTab2,
       AppTab1,
       AppTab2,
+      AppStepper
     },
 
     data() {
@@ -80,9 +83,11 @@
       },
 
       changeTab(currentTab) {
-        const appTop = document.querySelector('#app').offsetTop
-        this.tab = currentTab
-        return window.scrollTo(0, appTop)
+        return this.tab = currentTab
+      },
+
+      changeStepperTab(currentTab) {
+        return this.tab = currentTab
       },
 
       setFormData(data) {
